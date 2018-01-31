@@ -90,6 +90,9 @@ int main(int argc, char **argv)
                for(int i = 0 ; i < h*w ; i++)
                {
                    imgBuf[i] = ((float) imgBuf[i] / UINT16_MAX) * 255;
+                   if(imgBuf[i] < 80 || imgBuf[i] > 200){
+                       imgBuf[i] = -1;
+                   }
 
                }
 
