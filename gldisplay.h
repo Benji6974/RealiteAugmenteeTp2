@@ -15,6 +15,10 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/imgcodecs/imgcodecs.hpp>
+#include <OpenNI.h>
+#include<list>
+
+using namespace openni;
 
 
 class GLDisplay : public QGLWidget
@@ -23,13 +27,36 @@ class GLDisplay : public QGLWidget
 public:
     explicit GLDisplay(QWidget *parent = 0);
     virtual void paintGL();
+    void initializeGL();
+    void resizeGL(int w, int h);
+    Device device;        // Software object for the physical device i.e.
+
+                             // PrimeSense Device Class
+
+   VideoStream ir;       // IR VideoStream Class Object
+
+   VideoFrameRef irf;    //IR VideoFrame Class Object
+
+   VideoMode vmode;      // VideoMode Object
+
+   Status rc;
+
+   Mat frame;     // OpenCV Matrix Object, also used to store images
+   Mat frame2;
+   int h, w;               // Height and Width of the IR VideoFrame
+
+   std::list<uint16_t*> images;
+
+
+
+
 
 protected:
 
 private:
     OpenCVwindow cvWindow;
 
-    cv::Mat frame;
+    //cv::Mat frame;
     cv::VideoCapture vid;
 };
 
