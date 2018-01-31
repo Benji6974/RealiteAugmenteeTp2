@@ -17,9 +17,9 @@ int main(int argc, char **argv)
 {
  QApplication app(argc, argv);
 
-    //MainWindow window;
+    MainWindow window;
 
-    //window.show();
+    window.show();
 
     Device device;        // Software object for the physical device i.e.
 
@@ -144,6 +144,8 @@ int main(int argc, char **argv)
 
                     int thresh = 100;
                     std::vector<std::vector<cv::Point> > contours;
+
+                    std::vector<std::vector<cv::Point> > contoursWeWant;
                     std::vector<Vec4i> hierarchy;
                     double th = cv::threshold(frame, frame, 127, 255, 1);
                     cv::erode(frame, frame, Mat());
@@ -157,24 +159,42 @@ int main(int argc, char **argv)
                     /// Draw contours
                     Mat drawing = Mat::zeros( canny_output.size(), CV_8U);
 
-                    int sizemax = 0;
-                    int imax = 0;
 
-                    for( int i = 0; i< contours.size(); i++ )
+                    // jmax = 99999999;
+
+                    /*for( int i = 0; i< contours.size(); i++ )
                     {
                         if(contours[i].size()>sizemax){
                             sizemax = contours[i].size();
                             imax = i;
+                        }
+
+                    }*/
+                     int imax = 0;
+                    for(int y = 0; y<5; y++){
+                        int sizemax = 0;
+
+                        for( int i = 0; i< contours.size(); i++ )
+                        {
+                            if(contours[i].size()>sizemax){
+                                sizemax = contours[i].size();
+                                imax = i;
+                                //jmax = sizemax;
+                            }
 
                         }
 
-
+                        Scalar color = Scalar(255,255,255);
+                        drawContours( drawing, contours, imax, color, 2, 8, hierarchy, 0, Point() );
+                        contoursWeWant.push_back(contours[imax]);
+                        contours.erase(contours.begin() + imax);
+;
                     }
 
-                    Scalar color = Scalar(255,255,255);
-                    drawContours( drawing, contours, imax, color, 2, 8, hierarchy, 0, Point() );
 
+                    //drawContours( drawing, contours, jmax, color, 2, 8, hierarchy, 0, Point() );
 
+                    std::cout<<"size contours we want : "<<contoursWeWant.size()<<std::endl;
 
 
 
