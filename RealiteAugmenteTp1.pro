@@ -7,13 +7,13 @@
 QT       += core gui opengl
 
 INCLUDEPATH += /usr/local/include/opencv
-INCLUDEPATH += OpenNI-Linux-x64-2.2/Include/
+INCLUDEPATH += ../RealiteAugmenteeTp2/OpenNI-Linux-x64-2.2/Include/
 LIBS += -L/usr/local/lib -lglut -lGLU -lGL -lopencv_features2d -lopencv_calib3d -lopencv_videoio -lopencv_core -lopencv_imgcodecs -lopencv_highgui -lopencv_imgcodecs -lopencv_imgproc -lopencv_ml -lopencv_video
-LIBS += -L /OpenNI-Linux-x64-2.2/Redist/ -lOpenNI2
+LIBS += -L../RealiteAugmenteeTp2/OpenNI-Linux-x64-2.2/Redist/ -lOpenNI2
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = RealiteAugmenteTp1
+TARGET = RealiteAugmenteTp2
 TEMPLATE = app
 
 CONFIG += c++11
