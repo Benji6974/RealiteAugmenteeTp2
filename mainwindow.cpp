@@ -17,3 +17,7 @@ void MainWindow::renderOpenCV()
 {
 
 }
+
+void MainWindow::setContoursPoint(std::vector<std::vector<cv::Point> > * v){
+    ui->widget->setContoursPoint(v);
+}

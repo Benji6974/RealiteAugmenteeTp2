@@ -29,35 +29,16 @@ public:
     virtual void paintGL();
     void initializeGL();
     void resizeGL(int w, int h);
-    Device device;        // Software object for the physical device i.e.
-
-                             // PrimeSense Device Class
-
-   VideoStream ir;       // IR VideoStream Class Object
-
-   VideoFrameRef irf;    //IR VideoFrame Class Object
-
-   VideoMode vmode;      // VideoMode Object
-
-   Status rc;
-
-   Mat frame;     // OpenCV Matrix Object, also used to store images
-   Mat frame2;
-   int h, w;               // Height and Width of the IR VideoFrame
-
-   std::list<uint16_t*> images;
-
-
+    void setContoursPoint(std::vector<std::vector<cv::Point> > * v);
 
 
 
 protected:
 
 private:
-    OpenCVwindow cvWindow;
 
-    //cv::Mat frame;
-    cv::VideoCapture vid;
+    std::vector<std::vector<cv::Point> > * contours;
+
 };
 
 #endif // GLDISPLAY_H

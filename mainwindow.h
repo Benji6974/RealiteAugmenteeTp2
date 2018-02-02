@@ -5,6 +5,12 @@
 #include <QThread>
 
 #include "opencvwindow.h"
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/imgcodecs/imgcodecs.hpp>
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +24,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void renderOpenCV();
+    void setContoursPoint(std::vector<std::vector<cv::Point>> *);
 
 private:
     Ui::MainWindow *ui;
