@@ -24,15 +24,16 @@ void GLDisplay::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
+    //std::vector<QVector3D> test = *contours;
     //std::cout<<contours->size()<<std::endl;
     if(contours->size() != 0){
         for(int i = 1; i < contours->size() - 1;i++)
         {
-                std::cout<<"contours : "<<contours[i].x()<<std::endl;
-//                glBegin(GL_LINES);
-//                glVertex3f(contours[i].x(), contours[i].y(), contours[i].z());
-//                glVertex3f(contours[i-1].x(), contours[i-1].y(), contours[i-1].z());
-//                glEnd();
+//                std::cout<<"contours : "<<test[i].x()<<std::endl;
+                glBegin(GL_LINES);
+                glVertex3f((*contours)[i].x()/1000, (*contours)[i].y()/1000, (*contours)[i].z()/1000);
+                glVertex3f((*contours)[i-1].x()/1000,(*contours)[i-1].y()/1000, (*contours)[i-1].z()/1000);
+                glEnd();
 
         }
     }
