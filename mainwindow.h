@@ -26,8 +26,9 @@ public:
     ~MainWindow();
     void renderOpenCV();
 
-    void setContours(std::vector<QVector3D> *);
+    void setContours(std::vector<std::vector<QVector3D> > *);
     void updateGL();
+    void setTxTy(float, float);
 
 private:
     Ui::MainWindow *ui;

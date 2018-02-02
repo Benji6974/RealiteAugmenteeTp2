@@ -58,7 +58,7 @@ int main(int argc, char **argv)
    int h, w;               // Height and Width of the IR VideoFrame
 
    std::list<uint16_t*> images;
-   std::vector<QVector3D> contoursGL;
+   std::vector<std::vector<QVector3D> > contoursGL;
    window.setContours(&contoursGL);
    while(true)             // Crux of this project
 
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
 
                     }*/
                      int imax = 0;
-                    for(int y = 0; y<3; y++){
+                    for(int y = 0; y<contours.size() - 1; y++){
                         int sizemax = 0;
 
                         for( int i = 0; i< contours.size(); i++ )
@@ -201,16 +201,16 @@ int main(int argc, char **argv)
 
                     /* Draw dans opengl */
                     contoursGL.clear();
-//                    for(unsigned int z = 0; z < contoursWeWant.size(); z++)
-//                    {
-                        std::vector<Point3f> tmp;
+                    for(unsigned int z = 0; z < contoursWeWant.size(); z++)
+                    {
+                        std::vector<QVector3D> tmp;
                         for(unsigned int w = 0; w < contoursWeWant[0].size(); w++)
                         {
-                             contoursGL.push_back(QVector3D(contoursWeWant[0][w].x, -contoursWeWant[0][w].y, 0.0f));
-//                               contoursGL.push_back(QVector3D(w,w,w));
+                             tmp.push_back(QVector3D(contoursWeWant[0][w].x, -contoursWeWant[0][w].y, 0.0f));
                         }
-                        //contoursGL.push_back(tmp);
-//                    }
+                        contoursGL.push_back(tmp);
+                    }
+                    window.setTxTy(frame.rows,frame.cols);
                     window.setContours(&contoursGL);
 
 

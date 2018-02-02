@@ -24,19 +24,25 @@ void GLDisplay::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
+    glScalef(0.5,0.5,0);
+    glBegin(GL_LINES);
     //std::vector<QVector3D> test = *contours;
     //std::cout<<contours->size()<<std::endl;
-    if(contours->size() != 0){
-        for(int i = 1; i < contours->size() - 1;i++)
+    if((*contours).size() != 0){
+        for(unsigned int j = 0; j < contours->size() - 1; j++)
         {
-//                std::cout<<"contours : "<<test[i].x()<<std::endl;
-                glBegin(GL_LINES);
-                glVertex3f((*contours)[i].x()/1000, (*contours)[i].y()/1000, (*contours)[i].z()/1000);
-                glVertex3f((*contours)[i-1].x()/1000,(*contours)[i-1].y()/1000, (*contours)[i-1].z()/1000);
-                glEnd();
+            for(unsigned int i = 1; i < (*contours)[j].size() - 1;i++)
+            {
+    //                std::cout<<"contours : "<<test[i].x()<<std::endl;
 
+                    glVertex3f(2 * ((*contours)[j][i].x() - tx)/tx, 4 * ((*contours)[j][i].y() + ty/2)/ty, (*contours)[j][i].z());
+                    glVertex3f(2 * ((*contours)[j][i-1].x() - tx)/tx,4 * ((*contours)[j][i-1].y() + ty/2)/ty, (*contours)[j][i-1].z());
+
+
+            }
         }
     }
+    glEnd();
 }
 
 void GLDisplay::resizeGL(int w, int h)
@@ -53,8 +59,13 @@ void GLDisplay::resizeGL(int w, int h)
 
 }
 
-void GLDisplay::setContoursPoint(std::vector<QVector3D> * v){
+void GLDisplay::setContoursPoint(std::vector<std::vector<QVector3D> > * v){
     contours = v;
     update();
 }
 
+void GLDisplay::setTxTy(float x, float y)
+{
+    tx = x;
+    ty = y;
+}

@@ -30,7 +30,8 @@ public:
     virtual void paintGL();
     void initializeGL();
     void resizeGL(int w, int h);
-    void setContoursPoint(std::vector<QVector3D> * );
+    void setContoursPoint(std::vector<std::vector<QVector3D> > * );
+    void setTxTy(float x, float y);
 
 
 
@@ -38,7 +39,8 @@ protected:
 
 private:
 
-    std::vector<QVector3D> * contours;
+    float tx,ty;
+    std::vector<std::vector<QVector3D> > * contours;
 
 };
 
