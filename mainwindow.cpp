@@ -18,9 +18,9 @@ void MainWindow::renderOpenCV()
 
 }
 
-std::vector<std::vector<Point3f> > & MainWindow::getContours()
+void MainWindow::setContours(std::vector<QVector3D> * v)
 {
-    return ui->widget->getContours();
+    ui->widget->setContoursPoint(v);
 }
 
 void MainWindow::updateGL(){

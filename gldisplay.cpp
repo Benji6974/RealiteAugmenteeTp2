@@ -24,16 +24,16 @@ void GLDisplay::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glLoadIdentity();
-    if(contours.size() != 0){
-        for(unsigned int i = 0; i < contours.size() - 1;i++)
+    //std::cout<<contours->size()<<std::endl;
+    if(contours->size() != 0){
+        for(int i = 1; i < contours->size() - 1;i++)
         {
-            for(unsigned int j = 1; j < contours[i].size() - 1; j++)
-            {
-                glBegin(GL_LINES);
-                glVertex3f(contours[i][j].x, contours[i][j].y, contours[i][j].z);
-                glVertex3f(contours[i][j-1].x, contours[i][j-1].y, contours[i][j-1].z);
-                glEnd();
-            }
+                std::cout<<"contours : "<<contours[i].x()<<std::endl;
+//                glBegin(GL_LINES);
+//                glVertex3f(contours[i].x(), contours[i].y(), contours[i].z());
+//                glVertex3f(contours[i-1].x(), contours[i-1].y(), contours[i-1].z());
+//                glEnd();
+
         }
     }
 }
@@ -52,13 +52,8 @@ void GLDisplay::resizeGL(int w, int h)
 
 }
 
-//void GLDisplay::setContoursPoint(std::vector<std::vector<cv::Point> > * v){
-//    contours = v;
-//    update();
-//}
-
-std::vector<std::vector<Point3f> > & GLDisplay::getContours()
-{
-    return contours;
+void GLDisplay::setContoursPoint(std::vector<QVector3D> * v){
+    contours = v;
+    update();
 }
 

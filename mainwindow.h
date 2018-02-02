@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QThread>
+#include <QVector3D>
 
 #include "opencvwindow.h"
 #include <opencv2/opencv.hpp>
@@ -25,7 +26,7 @@ public:
     ~MainWindow();
     void renderOpenCV();
 
-    std::vector<std::vector<Point3f> > & getContours();
+    void setContours(std::vector<QVector3D> *);
     void updateGL();
 
 private:

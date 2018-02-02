@@ -6,6 +6,7 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <OpenNI.h>
+#include <QVector3D>
 
 #include "opencvwindow.h"
 
@@ -29,8 +30,7 @@ public:
     virtual void paintGL();
     void initializeGL();
     void resizeGL(int w, int h);
-//    void setContoursPoint(std::vector<std::vector<cv::Point> > * v);
-    std::vector<std::vector<Point3f> > & getContours();
+    void setContoursPoint(std::vector<QVector3D> * );
 
 
 
@@ -38,7 +38,7 @@ protected:
 
 private:
 
-    std::vector<std::vector<Point3f> > contours;
+    std::vector<QVector3D> * contours;
 
 };
 

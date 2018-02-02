@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstddef>
 #include <vector>
+#include <QVector3D>
 #include<list>
 #include <opencv2/opencv.hpp>
 #include "opencv2/highgui/highgui.hpp"
@@ -57,6 +58,8 @@ int main(int argc, char **argv)
    int h, w;               // Height and Width of the IR VideoFrame
 
    std::list<uint16_t*> images;
+   std::vector<QVector3D> contoursGL;
+   window.setContours(&contoursGL);
    while(true)             // Crux of this project
 
    {
@@ -192,22 +195,23 @@ int main(int argc, char **argv)
                     }
 
 
-                    std::cout<<"size contours we want : "<<contoursWeWant.size()<<std::endl;
+//                    std::cout<<"size contours we want : "<<contoursWeWant.size()<<std::endl;
 
-                    std::vector<std::vector<Point3f> > * contoursGL = &(window.getContours());
+                  //  std::vector<Point3f> contoursGL;
 
                     /* Draw dans opengl */
-                    contoursGL->clear();
-                    for(unsigned int z = 0; z < contoursWeWant.size(); z++)
-                    {
+                    contoursGL.clear();
+//                    for(unsigned int z = 0; z < contoursWeWant.size(); z++)
+//                    {
                         std::vector<Point3f> tmp;
-                        for(unsigned int w = 0; w < contoursWeWant[z].size(); w++)
+                        for(unsigned int w = 0; w < contoursWeWant[0].size(); w++)
                         {
-                            tmp.push_back(Point3f(contoursWeWant[z][w].x, contoursWeWant[z][w].y, 0.0f));
+                             contoursGL.push_back(QVector3D(contoursWeWant[0][w].x, -contoursWeWant[0][w].y, 0.0f));
+//                               contoursGL.push_back(QVector3D(w,w,w));
                         }
-                        contoursGL->push_back(tmp);
-                    }
-                    window.updateGL();
+                        //contoursGL.push_back(tmp);
+//                    }
+                    window.setContours(&contoursGL);
 
 
                     namedWindow("ir", 1);       // Create a named window
