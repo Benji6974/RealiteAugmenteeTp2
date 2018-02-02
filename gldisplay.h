@@ -29,7 +29,8 @@ public:
     virtual void paintGL();
     void initializeGL();
     void resizeGL(int w, int h);
-    void setContoursPoint(std::vector<std::vector<cv::Point> > * v);
+//    void setContoursPoint(std::vector<std::vector<cv::Point> > * v);
+    std::vector<std::vector<Point3f> > & getContours();
 
 
 
@@ -37,7 +38,7 @@ protected:
 
 private:
 
-    std::vector<std::vector<cv::Point> > * contours;
+    std::vector<std::vector<Point3f> > contours;
 
 };
 

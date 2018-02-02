@@ -145,7 +145,7 @@ int main(int argc, char **argv)
                     int thresh = 100;
                     std::vector<std::vector<cv::Point> > contours;
 
-                    std::vector<std::vector<cv::Point> > * contoursWeWant;
+                    std::vector<std::vector<cv::Point> > contoursWeWant;
                     std::vector<Vec4i> hierarchy;
                     double th = cv::threshold(frame, frame, 127, 255, 1);
                     cv::erode(frame, frame, Mat());
@@ -186,16 +186,28 @@ int main(int argc, char **argv)
 
                         Scalar color = Scalar(255,255,255);
                         drawContours( drawing, contours, imax, color, 2, 8, hierarchy, 0, Point() );
-                        contoursWeWant->push_back(contours[imax]);
+                        contoursWeWant.push_back(contours[imax]);
                         contours.erase(contours.begin() + imax);
 ;
                     }
 
 
-                    std::cout<<"size contours we want : "<<contoursWeWant->size()<<std::endl;
+                    std::cout<<"size contours we want : "<<contoursWeWant.size()<<std::endl;
+
+                    std::vector<std::vector<Point3f> > * contoursGL = &(window.getContours());
 
                     /* Draw dans opengl */
-                    window.setContoursPoint(contoursWeWant);
+                    contoursGL->clear();
+                    for(unsigned int z = 0; z < contoursWeWant.size(); z++)
+                    {
+                        std::vector<Point3f> tmp;
+                        for(unsigned int w = 0; w < contoursWeWant[z].size(); w++)
+                        {
+                            tmp.push_back(Point3f(contoursWeWant[z][w].x, contoursWeWant[z][w].y, 0.0f));
+                        }
+                        contoursGL->push_back(tmp);
+                    }
+                    window.updateGL();
 
 
                     namedWindow("ir", 1);       // Create a named window

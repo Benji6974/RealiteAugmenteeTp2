@@ -24,7 +24,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void renderOpenCV();
-    void setContoursPoint(std::vector<std::vector<cv::Point>> *);
+
+    std::vector<std::vector<Point3f> > & getContours();
+    void updateGL();
 
 private:
     Ui::MainWindow *ui;
